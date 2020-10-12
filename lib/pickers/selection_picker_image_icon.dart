@@ -24,7 +24,7 @@ class SelectionPickerImageIcon extends StatefulWidget {
   // Variables
   final List<String> items;
   final String initialItem;
-  final List<ImageIcon> icons;
+  final List<Image> icons;
 
   @override
   SelectionPickerImageIconState createState() {
@@ -49,18 +49,18 @@ class SelectionPickerImageIconState extends State<SelectionPickerImageIcon> {
           itemBuilder: (BuildContext context, int index) {
             bool isSelected = (widget.items[index] == selectedValue);
             Color itemColor = (isSelected) ? theme.accentColor : theme.textTheme.bodyText2.color;
-            ImageIcon icon = (widget.icons == null) ? null : widget.icons[index];
-            Image image;
-            if (icon != null && icon.color == null)
-              image = Image(
-                  image: icon.image,
-                  width: icon.size,
-                  height: icon.size,
-                  fit: BoxFit.scaleDown,
-                  alignment: FractionalOffset.center);
+            Image icon = (widget.icons == null) ? null : widget.icons[index];
+            
+            // if (icon != null && icon.color == null)
+            //   Icons.ac_unit_outlined = Image(
+            //       image: icon.image,
+            //       width: icon.size,
+            //       height: icon.size,
+            //       fit: BoxFit.scaleDown,
+            //       alignment: FractionalOffset.center);
 
             return ListTile(
-              leading: image,
+              leading: icon,
               title: Text(
                 widget.items[index],
                 style: TextStyle(color: itemColor),

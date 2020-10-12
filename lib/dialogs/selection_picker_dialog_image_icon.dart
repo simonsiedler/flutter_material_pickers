@@ -31,7 +31,7 @@ class SelectionPickerDialogImageIcon extends StatefulWidget
   final String initialItem;
   @override
   final String title;
-  final List<ImageIcon> icons;
+  final List<Image> icons;
   @override
   final Color headerColor;
   @override

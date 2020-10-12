@@ -10,7 +10,7 @@ void showMaterialSelectionPickerImageIcon({
   String title,
   List<String> items,
   String selectedItem,
-  List<ImageIcon> icons,
+  List<Image> icons,
   Color headerColor,
   Color headerTextColor,
   Color backgroundColor,
