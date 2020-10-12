@@ -48,21 +48,24 @@ class SelectionPickerImageIconState extends State<SelectionPickerImageIcon> {
           itemCount: itemCount,
           itemBuilder: (BuildContext context, int index) {
             bool isSelected = (widget.items[index] == selectedValue);
-            Color itemColor = (isSelected)
-                ? theme.accentColor
-                : theme.textTheme.bodyText2.color;
+            Color itemColor = (isSelected) ? theme.accentColor : theme.textTheme.bodyText2.color;
             ImageIcon icon = (widget.icons == null) ? null : widget.icons[index];
-            // if (icon != null && icon.color == null)
-            //   icon = Icon(icon.icon, color: itemColor);
+            Image image;
+            if (icon != null && icon.color == null)
+              image = Image(
+                  image: icon.image,
+                  width: icon.size,
+                  height: icon.size,
+                  fit: BoxFit.scaleDown,
+                  alignment: FractionalOffset.center);
 
             return ListTile(
-              leading: icon,
+              leading: image,
               title: Text(
                 widget.items[index],
                 style: TextStyle(color: itemColor),
               ),
-              trailing:
-                  (isSelected) ? Icon(Icons.check, color: itemColor) : null,
+              trailing: (isSelected) ? Icon(Icons.check, color: itemColor) : null,
               onTap: () {
                 setState(() {
                   selectedValue = widget.items[index];
