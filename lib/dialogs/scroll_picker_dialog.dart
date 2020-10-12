@@ -21,7 +21,7 @@ class ScrollPickerDialog extends StatefulWidget
     this.buttonTextColor,
     this.maxLongSide,
     this.maxShortSide,
-    this.showDivider: true,
+    this.showDivider: false,
     this.confirmText,
     this.cancelText,
   });
