@@ -2,6 +2,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_material_pickers/flutter_material_pickers.dart';
+import 'package:flutter_material_pickers/helpers/show_number_double_picker.dart';
 import 'package:intl/intl.dart';
 
 import 'model.dart';
@@ -35,10 +36,8 @@ ThemeData _buildTheme(Brightness brightness) {
     theme = theme.copyWith(
       primaryColor: Colors.green, // background color of the header area
       backgroundColor: Colors.green[100], // app background color
-      accentColor:
-          Colors.green[900], // color of selected controls and button bar text
-      dialogBackgroundColor:
-          Colors.green[100], // background color of the entire dialog
+      accentColor: Colors.green[900], // color of selected controls and button bar text
+      dialogBackgroundColor: Colors.green[100], // background color of the entire dialog
       primaryTextTheme: theme.primaryTextTheme.copyWith(
         headline6: theme.primaryTextTheme.headline6.copyWith(
           color: Colors.lightGreen[50], // text color of the header area
@@ -76,13 +75,10 @@ class _TestPageState extends State<TestPage> {
           title: Text("Material Picker Examples"),
           actions: <Widget>[
             IconButton(
-              icon: Theme.of(context).brightness == Brightness.dark
-                  ? Icon(Icons.brightness_7)
-                  : Icon(Icons.brightness_4),
-              onPressed: () => DynamicTheme.of(context).setBrightness(
-                  Theme.of(context).brightness == Brightness.dark
-                      ? Brightness.light
-                      : Brightness.dark),
+              icon:
+                  Theme.of(context).brightness == Brightness.dark ? Icon(Icons.brightness_7) : Icon(Icons.brightness_4),
+              onPressed: () => DynamicTheme.of(context)
+                  .setBrightness(Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark),
             )
           ],
           bottom: TabBar(
@@ -178,9 +174,7 @@ class _TestPageState extends State<TestPage> {
                         TextSpan(
                             text:
                                 "This example has the button bar hidden, so you dismiss it by clicking outside the window.",
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.w300)),
+                            style: TextStyle(fontStyle: FontStyle.italic, fontWeight: FontWeight.w300)),
                         //TextSpan(text: 'your text',style: TextStyle(color: Colors.redAccent,fontSize: 38))
                       ],
                     ),
@@ -213,8 +207,7 @@ class _TestPageState extends State<TestPage> {
               showDivider: false,
               items: model.usStates,
               selectedItem: model.selectedUsState,
-              onChanged: (value) =>
-                  setState(() => model.selectedUsState = value),
+              onChanged: (value) => setState(() => model.selectedUsState = value),
               onCancelled: () => print("Scroll Picker cancelled"),
               onConfirmed: () => print("Scroll Picker confirmed"),
             ),
@@ -237,15 +230,19 @@ class _TestPageState extends State<TestPage> {
           width: 150.0,
           child: RaisedButton(
             child: Text("Number Picker"),
-            onPressed: () => showMaterialNumberPicker(
+            onPressed: () => showMaterialNumberDoublePicker(
               context: context,
               title: "Pick Your Age",
-              maxNumber: 100,
-              minNumber: 14,
+              maxNumber1: 100,
+              minNumber1: 14,
+              maxNumber2: 9,
+              minNumber2: 0,
+              separator: " , ",
               confirmText: "Count me in",
               cancelText: "Negatory",
-              selectedNumber: model.age,
-              onChanged: (value) => setState(() => model.age = value),
+              selectedNumber1: model.age,
+              selectedNumber2: 0,
+              onChanged: (value) => setState(() => model.age = value[0] + value[1]),
             ),
           ),
         ),
@@ -271,8 +268,7 @@ class _TestPageState extends State<TestPage> {
               title: "Pick Your Toppings",
               items: model.iceCreamToppings,
               selectedItems: model.selectedIceCreamToppings,
-              onChanged: (value) =>
-                  setState(() => model.selectedIceCreamToppings = value),
+              onChanged: (value) => setState(() => model.selectedIceCreamToppings = value),
             ),
           ),
         ),
@@ -298,8 +294,7 @@ class _TestPageState extends State<TestPage> {
               title: "Pick Your City",
               items: model.usStates,
               selectedItem: model.selectedUsState,
-              onChanged: (value) =>
-                  setState(() => model.selectedUsState = value),
+              onChanged: (value) => setState(() => model.selectedUsState = value),
             ),
           ),
         ),
